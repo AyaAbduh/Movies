@@ -12,7 +12,7 @@ interface TheDBInterface {
     suspend fun getMovies(
         @Query("apikey") apikey: String,
         @Query("page") page: Int,
-    ): MoviesResponse
+    ): Response<MoviesResponse>
 
 
     //movie details
