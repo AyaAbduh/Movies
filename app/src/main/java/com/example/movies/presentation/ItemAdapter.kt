@@ -13,8 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movies.R
 import com.example.movies.data.Movie
+import javax.inject.Inject
 
-class ItemAdapter(): PagingDataAdapter<Movie, ItemAdapter.ItemViewHolder>(DiffUtilCallBack) {
+class ItemAdapter @Inject constructor() : PagingDataAdapter<Movie, ItemAdapter.ItemViewHolder>(DiffUtilCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val view = LayoutInflater.from(parent.context)

@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var  movieItemViewModel: MovieItemViewModel
+    @Inject
+    lateinit var adapter: ItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +29,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun getMovies() {
 
-        val adapter:ItemAdapter = ItemAdapter()
         val recyclerView: RecyclerView = findViewById(R.id.MovieRecycler)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
