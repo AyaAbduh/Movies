@@ -16,7 +16,7 @@ class MovieItemPagingSource(
 
         return try {
             val response = theDBInterface.getMovies("4d117eb81482c3385a4a97c6a874fcef",page)
-            val items = response.movies
+            val items = response.body()?.movies ?: emptyList()
 
             // Return paginated data (prev, next key management)
             LoadResult.Page(
