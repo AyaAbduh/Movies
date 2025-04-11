@@ -30,7 +30,10 @@ class MovieItemPagingSource(
     }
 
     // Return the refresh key for reloading (for pagination handling)
-    override fun getRefreshKey(state: PagingState<Int,Movie >): Int? {
-        return null
+    override fun getRefreshKey(state: PagingState<Int, Movie>): Int? {
+        return state.anchorPosition?.let { anchorPosition ->
+            val anchorPage = state.closestPageToPosition(anchorPosition)
+            anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
+        }
     }
 }
