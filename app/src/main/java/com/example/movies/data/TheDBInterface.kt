@@ -10,7 +10,7 @@ interface TheDBInterface {
     //list of movies
     @GET("discover/movie")
     suspend fun getMovies(
-        @Query("apikey") apikey: String,
+        @Query("api_key") apikey: String,
         @Query("page") page: Int,
     ): Response<MoviesResponse>
 
