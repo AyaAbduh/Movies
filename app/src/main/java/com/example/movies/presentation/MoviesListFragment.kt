@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.R
@@ -45,6 +45,7 @@ class MoviesListFragment : Fragment() {
 
     private fun getMovies(view: View) {
 
+       // findNavController().navigate(R.id.action_moviesListFragment_to_movieDetailsFragment)
         val recyclerView: RecyclerView = view.findViewById(R.id.MovieRecycler)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         recyclerView.adapter = adapter

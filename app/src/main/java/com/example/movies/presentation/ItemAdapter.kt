@@ -6,8 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.Navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -43,10 +42,7 @@ class ItemAdapter @Inject constructor() : PagingDataAdapter<Movie, ItemAdapter.I
               //  val intent = Intent(imageView.context, CharacterDetailsActivity::class.java)
                // intent.putExtra("id", item?.id)
                // imageView.context.startActivity(intent)
-
-                val activity = imageView.context as Activity
-                val navGraphActivity=activity as NavGraphActivity
-                navGraphActivity.findNavController(R.id.nav_graph).navigate(R.id.action_moviesListFragment_to_movieDetailsFragment)
+                findNavController(imageView).navigate(R.id.action_moviesListFragment_to_movieDetailsFragment)
             }
         }
     }
