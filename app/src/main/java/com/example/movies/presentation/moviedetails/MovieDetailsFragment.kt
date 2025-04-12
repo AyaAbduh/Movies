@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.example.movies.R
 import com.example.movies.presentation.movieslist.MovieItemViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,8 +42,9 @@ class MovieDetailsFragment : Fragment() {
         lifecycleScope.launch {
             movieDetailsViewModel.movie.collect { movie ->
                 movie?.let {
-                   // it.poster_path
-
+                    Glide.with(view.context)
+                        .load("https://image.tmdb.org/t/p/w500"+it.poster_path)
+                        .into(view.findViewById(R.id.movieImageView))
                    val title  =view.findViewById<TextView>(R.id.movieTitleTextView)
                     title.text=it.title
 
