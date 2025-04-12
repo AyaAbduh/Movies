@@ -31,12 +31,6 @@ class MoviesListFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_movies_list, container, false)
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//         val navGraphActivity=activity as NavGraphActivity
-//        navGraphActivity.findNavController(R.id.nav_graph).navigate(R.id.action_moviesListFragment_to_movieDetailsFragment)
-//    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -45,7 +39,6 @@ class MoviesListFragment : Fragment() {
 
     private fun getMovies(view: View) {
 
-       // findNavController().navigate(R.id.action_moviesListFragment_to_movieDetailsFragment)
         val recyclerView: RecyclerView = view.findViewById(R.id.MovieRecycler)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         recyclerView.adapter = adapter
