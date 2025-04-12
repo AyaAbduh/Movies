@@ -1,19 +1,20 @@
 package com.example.movies.presentation
 
-import android.content.ClipData.Item
-import android.content.Intent
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.movies.R
 import com.example.movies.data.Movie
 import javax.inject.Inject
+
 
 class ItemAdapter @Inject constructor() : PagingDataAdapter<Movie, ItemAdapter.ItemViewHolder>(DiffUtilCallBack) {
 
@@ -42,6 +43,10 @@ class ItemAdapter @Inject constructor() : PagingDataAdapter<Movie, ItemAdapter.I
               //  val intent = Intent(imageView.context, CharacterDetailsActivity::class.java)
                // intent.putExtra("id", item?.id)
                // imageView.context.startActivity(intent)
+
+                val activity = imageView.context as Activity
+                val navGraphActivity=activity as NavGraphActivity
+                navGraphActivity.findNavController(R.id.nav_graph).navigate(R.id.action_moviesListFragment_to_movieDetailsFragment)
             }
         }
     }
