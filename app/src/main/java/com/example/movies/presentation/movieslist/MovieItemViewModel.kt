@@ -1,11 +1,11 @@
-package com.example.movies.presentation
+package com.example.movies.presentation.movieslist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.movies.data.Movie
-import com.example.movies.domain.MovieItemRepository
+import com.example.movies.domain.movieslist.MovieItemRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

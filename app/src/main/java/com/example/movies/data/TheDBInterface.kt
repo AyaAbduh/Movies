@@ -19,7 +19,7 @@ interface TheDBInterface {
     @GET("movie/{movie_id}")
     suspend fun getMovieDetails(
         @Path("movie_id") movie_id: String,
-        @Query("apikey") apikey: String
+        @Query("api_key") api_key: String
     ): Movie
 
 

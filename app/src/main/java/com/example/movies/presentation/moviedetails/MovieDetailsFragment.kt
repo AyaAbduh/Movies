@@ -1,17 +1,25 @@
-package com.example.movies.presentation
+package com.example.movies.presentation.moviedetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.movies.R
+import com.example.movies.presentation.movieslist.MovieItemViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MovieDetailsFragment : Fragment() {
+
+    private val movieDetailsViewModel: MovieDetailsViewModel by viewModels()
 
 
     private val safeArgs : MovieDetailsFragmentArgs by navArgs()
@@ -28,6 +36,22 @@ class MovieDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         Toast.makeText(view.context,safeArgs.Id.toString(),Toast.LENGTH_LONG).show()
+
+        movieDetailsViewModel.loadMovie(safeArgs.Id.toString())
+        lifecycleScope.launch {
+            movieDetailsViewModel.movie.collect { movie ->
+                movie?.let {
+                   // it.poster_path
+
+                   val title  =view.findViewById<TextView>(R.id.movieTitleTextView)
+                    title.text=it.title
+
+
+                }
+            }
+        }
+
+
 
     }
 }

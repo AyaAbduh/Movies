@@ -1,6 +1,5 @@
-package com.example.movies.presentation
+package com.example.movies.presentation.movieslist
 
-import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,9 @@ import com.example.movies.data.Movie
 import javax.inject.Inject
 
 
-class ItemAdapter @Inject constructor() : PagingDataAdapter<Movie, ItemAdapter.ItemViewHolder>(DiffUtilCallBack) {
+class ItemAdapter @Inject constructor() : PagingDataAdapter<Movie, ItemAdapter.ItemViewHolder>(
+    DiffUtilCallBack
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val view = LayoutInflater.from(parent.context)

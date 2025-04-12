@@ -1,4 +1,4 @@
-package com.example.movies.domain
+package com.example.movies.domain.movieslist
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
