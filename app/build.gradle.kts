@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -38,6 +39,8 @@ android {
 }
 
 dependencies {
+//    val nav_version = "2.7.0"
+//    implementation("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     val lifecycle_version = "2.8.7"

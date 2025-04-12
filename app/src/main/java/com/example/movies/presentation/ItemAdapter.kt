@@ -42,7 +42,8 @@ class ItemAdapter @Inject constructor() : PagingDataAdapter<Movie, ItemAdapter.I
               //  val intent = Intent(imageView.context, CharacterDetailsActivity::class.java)
                // intent.putExtra("id", item?.id)
                // imageView.context.startActivity(intent)
-                findNavController(imageView).navigate(R.id.action_moviesListFragment_to_movieDetailsFragment)
+                val directions=MoviesListFragmentDirections.actionMoviesListFragmentToMovieDetailsFragment(Id = item!!.id)
+                findNavController(imageView).navigate(directions)
             }
         }
     }
