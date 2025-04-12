@@ -10,6 +10,7 @@ import androidx.navigation.Navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.movies.R
 import com.example.movies.data.Movie
 import javax.inject.Inject
@@ -34,14 +35,11 @@ class ItemAdapter @Inject constructor() : PagingDataAdapter<Movie, ItemAdapter.I
 
         fun bind(item: Movie?) {
             textView.text = item?.title
-           // Glide.with(imageView.context)
-             //   .load(item?.thumbnail?.path?.replace("http","https")+"."+item?.thumbnail?.extension)
-               // .into(imageView)
+           Glide.with(imageView.context)
+                .load("https://image.tmdb.org/t/p/w500"+item?.poster_path)
+               .into(imageView)
 
             imageView.setOnClickListener {
-              //  val intent = Intent(imageView.context, CharacterDetailsActivity::class.java)
-               // intent.putExtra("id", item?.id)
-               // imageView.context.startActivity(intent)
                 val directions=MoviesListFragmentDirections.actionMoviesListFragmentToMovieDetailsFragment(Id = item!!.id)
                 findNavController(imageView).navigate(directions)
             }
