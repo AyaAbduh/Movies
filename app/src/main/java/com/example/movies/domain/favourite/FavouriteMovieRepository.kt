@@ -18,6 +18,6 @@ class FavouriteMovieRepository @Inject constructor(
     }
 
     suspend fun updateFavorite(movieId: Int, isFavorite: Boolean) {
-        dao.updateFavoriteStatus(movieId, !isFavorite)
+        dao.updateFavoriteStatus(movieId, isFavorite)
     }
 }

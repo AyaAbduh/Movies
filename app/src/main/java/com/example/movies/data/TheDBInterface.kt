@@ -21,6 +21,4 @@ interface TheDBInterface {
         @Path("movie_id") movie_id: String,
         @Query("api_key") api_key: String
     ): Movie
-
-
 }

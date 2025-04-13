@@ -3,6 +3,8 @@ package com.example.movies.presentation.moviedetails
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movies.data.Movie
+import com.example.movies.data.NetworkUtil
+import com.example.movies.data.NetworkUtil.isConnected
 import com.example.movies.domain.moviedetails.MovieDetailsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,9 +21,11 @@ class MovieDetailsViewModel @Inject constructor(private val repository: MovieDet
     val movie: StateFlow<Movie?> = _movie
 
     fun loadMovie(id: String) {
-        viewModelScope.launch {
-            repository.getMovieDetails(id).collect {
-                _movie.value = it
+        if (NetworkUtil.isConnected) {
+            viewModelScope.launch {
+                repository.getMovieDetails(id).collect {
+                    _movie.value = it
+                }
             }
         }
     }

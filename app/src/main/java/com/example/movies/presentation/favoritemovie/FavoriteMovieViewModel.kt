@@ -21,6 +21,10 @@ class FavoriteMovieViewModel @Inject constructor(
     val movies: StateFlow<List<Movie>> = _movies.asStateFlow()
 
     init {
+        loadFavorites()
+    }
+
+    private fun loadFavorites() {
         viewModelScope.launch {
             val favoriteMovies = repository.getFavoriteMovies()
             _movies.value = favoriteMovies
@@ -30,6 +34,7 @@ class FavoriteMovieViewModel @Inject constructor(
     fun toggleFavorite(movie: Movie) {
         viewModelScope.launch {
             repository.updateFavorite(movie.id, !movie.isFavorite)
+            loadFavorites()
         }
     }
 }
