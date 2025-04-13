@@ -12,7 +12,7 @@ interface MovieDao {
     @Query("SELECT * FROM movies ORDER BY id ASC")
     fun getMovies(): PagingSource<Int, Movie>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(movies: List<Movie>)
 
     @Query("SELECT * FROM movies WHERE isFavorite = 1 ORDER BY id DESC")

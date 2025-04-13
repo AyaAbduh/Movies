@@ -41,6 +41,7 @@ class ItemAdapter @Inject constructor(
 
         fun bind(item: Movie?) {
             textView.text = item?.title
+            favImageView.setImageResource(if (item?.isFavorite == true) R.drawable.baseline_favorite_24 else R.drawable.baseline_favorite_border_24 )
             Glide.with(imageView.context)
                 .load("https://image.tmdb.org/t/p/w500" + item?.poster_path)
                 .into(imageView)
@@ -52,6 +53,11 @@ class ItemAdapter @Inject constructor(
             }
             favImageView.setOnClickListener {
                 item?.let {
+                    if (it.isFavorite) {
+                        favImageView.setImageResource(R.drawable.baseline_favorite_border_24)
+                    } else {
+                        favImageView.setImageResource(R.drawable.baseline_favorite_24)
+                    }
                     onMovieClicked(it)
                 }
             }
