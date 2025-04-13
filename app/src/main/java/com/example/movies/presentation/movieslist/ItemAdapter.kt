@@ -9,13 +9,16 @@ import androidx.navigation.Navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Dao
 import com.bumptech.glide.Glide
 import com.example.movies.R
 import com.example.movies.data.Movie
 import javax.inject.Inject
 
 
-class ItemAdapter @Inject constructor() : PagingDataAdapter<Movie, ItemAdapter.ItemViewHolder>(
+class ItemAdapter @Inject constructor(
+    private val onMovieClicked: (Movie) -> Unit
+) : PagingDataAdapter<Movie, ItemAdapter.ItemViewHolder>(
     DiffUtilCallBack
 ) {
 
@@ -30,20 +33,29 @@ class ItemAdapter @Inject constructor() : PagingDataAdapter<Movie, ItemAdapter.I
         holder.bind(item)
     }
 
-    class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textView: TextView = itemView.findViewById<TextView>(R.id.textView)
         private val imageView: ImageView = itemView.findViewById<ImageView>(R.id.CharacterImageView)
+        private val favImageView: ImageView =
+            itemView.findViewById<ImageView>(R.id.FavoriteImageView)
 
         fun bind(item: Movie?) {
             textView.text = item?.title
-           Glide.with(imageView.context)
-                .load("https://image.tmdb.org/t/p/w500"+item?.poster_path)
-               .into(imageView)
+            Glide.with(imageView.context)
+                .load("https://image.tmdb.org/t/p/w500" + item?.poster_path)
+                .into(imageView)
 
             imageView.setOnClickListener {
-                val directions=MoviesListFragmentDirections.actionMoviesListFragmentToMovieDetailsFragment(Id = item!!.id)
+                val directions =
+                    MoviesListFragmentDirections.actionMoviesListFragmentToMovieDetailsFragment(Id = item!!.id)
                 findNavController(imageView).navigate(directions)
             }
+            favImageView.setOnClickListener {
+                item?.let {
+                    onMovieClicked(it)
+                }
+            }
+
         }
     }
 

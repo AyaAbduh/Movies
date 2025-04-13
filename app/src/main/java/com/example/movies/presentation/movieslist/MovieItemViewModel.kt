@@ -7,11 +7,17 @@ import androidx.paging.cachedIn
 import com.example.movies.data.Movie
 import com.example.movies.domain.movieslist.MovieItemRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MovieItemViewModel @Inject constructor(private val repository: MovieItemRepository) : ViewModel() {
 
-    // Exposing paginated data as a Flow to the UI
     val items: Flow<PagingData<Movie>> = repository.getPagedItems()
-        .cachedIn(viewModelScope)  // Cache the data in the viewModel scope for efficient paging
+        .cachedIn(viewModelScope)
+
+    fun updateFavoriteState(movie: Movie) {
+        viewModelScope.launch {
+            repository.updateFavoriteState(movie.id, !movie.isFavorite)
+        }
+    }
 }

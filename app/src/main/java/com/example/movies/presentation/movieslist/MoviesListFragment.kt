@@ -19,7 +19,6 @@ class MoviesListFragment : Fragment() {
 
     @Inject
     lateinit var  movieItemViewModel: MovieItemViewModel
-    @Inject
     lateinit var adapter: ItemAdapter
 
     override fun onCreateView(
@@ -40,8 +39,10 @@ class MoviesListFragment : Fragment() {
 
         val recyclerView: RecyclerView = view.findViewById(R.id.MovieRecycler)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
+        adapter = ItemAdapter { movie ->
+            movieItemViewModel.updateFavoriteState(movie)
+        }
         recyclerView.adapter = adapter
-
 
         lifecycleScope.launch {
             movieItemViewModel.items.collectLatest {

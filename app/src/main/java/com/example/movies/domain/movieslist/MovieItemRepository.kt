@@ -29,4 +29,8 @@ class MovieItemRepository@Inject constructor(private val theDBInterface: TheDBIn
             }
         ).flow
     }
+
+    suspend fun updateFavoriteState(movieID: Int, isFavorite: Boolean) {
+        itemDao.updateFavoriteStatus(movieID, isFavorite)
+    }
 }

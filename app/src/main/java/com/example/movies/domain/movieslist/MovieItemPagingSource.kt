@@ -12,31 +12,25 @@ class MovieItemPagingSource(
     private val dao: MovieDao
 ) : PagingSource<Int, Movie>() {
 
-    // This method loads data based on the current page number
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
-        val page = params.key ?: 1  // Default to page 1 if no key is provided
-        val pageSize = params.loadSize
+        val page = params.key ?: 1
 
         return try {
             val response = theDBInterface.getMovies("4d117eb81482c3385a4a97c6a874fcef",page)
-            val items = response.body()?.movies ?: emptyList()
+            var items = response.body()?.movies ?: emptyList()
 
             dao.insertAll(items)
 
-
-
-            // Return paginated data (prev, next key management)
             LoadResult.Page(
                 data = items,
-                prevKey = if (page == 1) null else page - 1,  // No previous page on the first page
-                nextKey = if (items.isEmpty()) null else page + 1  // Next page exists if items are returned
+                prevKey = if (page == 1) null else page - 1,
+                nextKey = if (items.isEmpty()) null else page + 1
             )
         } catch (e: Exception) {
-            LoadResult.Error(e)  // Handle errors
+            LoadResult.Error(e)
         }
     }
 
-    // Return the refresh key for reloading (for pagination handling)
     override fun getRefreshKey(state: PagingState<Int, Movie>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)

@@ -18,5 +18,6 @@ data class Movie(
     val poster_path: String,
     val overview: String,
     val runtime: Int,
+    var isFavorite: Boolean = false
 )
 
