@@ -47,6 +47,11 @@ class MovieDetailsFragment : Fragment() {
                         .into(view.findViewById(R.id.movieImageView))
                    val title  =view.findViewById<TextView>(R.id.movieTitleTextView)
                     title.text=it.title
+                    view.findViewById<TextView>(R.id.releaseDateTextView).text=it.release_date
+
+                    view.findViewById<TextView>(R.id.overViewTextView).text=it.overview
+                    view.findViewById<TextView>(R.id.runTimeTextView).text=it.runtime.toString()
+
 
 
                 }
