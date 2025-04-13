@@ -2,11 +2,14 @@ package com.example.movies.domain.movieslist
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import androidx.room.Dao
 import com.example.movies.data.Movie
+import com.example.movies.data.MovieDao
 import com.example.movies.data.TheDBInterface
 
 class MovieItemPagingSource(
-    private val theDBInterface: TheDBInterface
+    private val theDBInterface: TheDBInterface,
+    private val dao: MovieDao
 ) : PagingSource<Int, Movie>() {
 
     // This method loads data based on the current page number
@@ -17,6 +20,10 @@ class MovieItemPagingSource(
         return try {
             val response = theDBInterface.getMovies("4d117eb81482c3385a4a97c6a874fcef",page)
             val items = response.body()?.movies ?: emptyList()
+
+            dao.insertAll(items)
+
+
 
             // Return paginated data (prev, next key management)
             LoadResult.Page(

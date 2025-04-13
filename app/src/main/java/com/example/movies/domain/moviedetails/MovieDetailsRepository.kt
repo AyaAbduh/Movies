@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 
 class MovieDetailsRepository @Inject constructor(private val theDBInterface: TheDBInterface) {
-        fun getMovieDetails( movie_id:String): Flow<Movie> = flow {
+        fun getMovieDetails( movie_id: String): Flow<Movie> = flow {
             emit(theDBInterface.getMovieDetails(movie_id , "4d117eb81482c3385a4a97c6a874fcef"))
         }
     }

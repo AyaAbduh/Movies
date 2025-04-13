@@ -1,5 +1,7 @@
 package com.example.movies.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 data class MoviesResponse(
@@ -8,11 +10,13 @@ data class MoviesResponse(
     val movies: List<Movie>
 )
 
+@Entity(tableName = "movies")
 data class Movie(
-    val id: Int,
+    @PrimaryKey val id: Int,
     val title: String,
     val release_date: String,
-    val poster_path:String,
-    val overview:String,
-    val runtime:Int,
+    val poster_path: String,
+    val overview: String,
+    val runtime: Int,
 )
+
